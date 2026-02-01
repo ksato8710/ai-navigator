@@ -21,26 +21,14 @@ export default function SearchBar() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="AIツールを検索… 例: 画像生成、議事録、翻訳"
-          className="w-full px-5 py-4 pr-14 text-lg border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm bg-white"
+          placeholder="AIツールを検索... 例: 画像生成、コーディング、翻訳"
+          className="w-full px-5 py-3.5 pr-24 text-base border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white text-gray-900 shadow-sm"
         />
         <button
           type="submit"
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-blue-500 transition-colors"
+          className="absolute right-2 top-1/2 -translate-y-1/2 px-5 py-2 bg-primary text-white font-bold text-sm rounded hover:bg-primary-dark transition-colors"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          SEARCH
         </button>
       </div>
     </form>

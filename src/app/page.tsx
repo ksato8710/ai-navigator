@@ -3,6 +3,7 @@ import CategoryGrid from "@/components/CategoryGrid";
 import ToolCard from "@/components/ToolCard";
 import { tools } from "@/data/tools";
 import { news } from "@/data/news";
+import { Category, CATEGORY_LABELS } from "@/types/tool";
 import Link from "next/link";
 
 export default function Home() {
@@ -12,152 +13,244 @@ export default function Home() {
     .slice(0, 8);
   const latestNews = [...news]
     .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 5);
+    .slice(0, 6);
+
+  // Category counts
+  const categoryCount = new Set(tools.map((t) => t.category)).size;
+
+  // Top picks per category (top 3 categories)
+  const topCategories: Category[] = ["chatbot", "image-generation", "code-assistant", "video-generation"];
 
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-16 sm:py-24">
+      <section className="bg-gray-50 py-16 sm:py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full mb-6 text-sm">
-            <span className="animate-pulse">🔴</span>
-            <span>毎日更新中 — {tools.length}ツール掲載</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-bold mb-4">
-            最新AIツール情報を
-            <br className="hidden sm:block" />
-            <span className="text-yellow-300">いち早く</span>キャッチ
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4 uppercase tracking-tight leading-tight">
+            Find The Best<br />
+            <span className="text-primary">AI Tool</span> For Your Needs
           </h1>
-          <p className="text-lg sm:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            話題のAIツールからニッチな専門ツールまで、
-            <br className="hidden sm:block" />
-            日本語で検索・比較。毎日新しいツールを追加中。
+          <p className="text-base sm:text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
+            独自スコアで評価・比較。あなたに最適なAIツールが見つかる。
           </p>
           <SearchBar />
-          <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="/news" className="bg-white/15 hover:bg-white/25 px-3 py-1 rounded-full transition-colors">
-              📰 最新ニュース
+          <div className="mt-5 flex flex-wrap justify-center gap-2 text-sm">
+            <Link href="/categories/chatbot" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-full transition-colors font-medium">
+              ChatBot
             </Link>
-            <Link href="/categories/code-assistant" className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors">
-              💻 AIコーディング
+            <Link href="/categories/image-generation" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-full transition-colors font-medium">
+              画像生成
             </Link>
-            <Link href="/categories/video-generation" className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors">
-              🎬 動画生成
+            <Link href="/categories/code-assistant" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-full transition-colors font-medium">
+              コード支援
             </Link>
-            <Link href="/free" className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors">
-              🆓 無料ツール
+            <Link href="/categories/video-generation" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-full transition-colors font-medium">
+              動画生成
+            </Link>
+            <Link href="/free" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-full transition-colors font-medium">
+              無料ツール
+            </Link>
+            <Link href="/japanese" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-full transition-colors font-medium">
+              日本語対応
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Recently Added Tools */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
-            🆕 最近追加されたツール
-          </h2>
-          <Link href="/search" className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-            すべて見る →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {recentTools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
-        </div>
-      </section>
-
-      {/* Latest News */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
-            📰 AIニュース
-          </h2>
-          <Link href="/news" className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-            すべてのニュース →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {latestNews.map((item) => (
-            <Link
-              key={item.id}
-              href="/news"
-              className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
-                  {item.category}
-                </span>
-                <span className="text-xs text-gray-400">{item.date}</span>
-              </div>
-              <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-2">
-                {item.title}
-              </h3>
-            </Link>
-          ))}
+      {/* Stats Bar */}
+      <section className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-12 text-center">
+            <div>
+              <span className="text-xl sm:text-2xl font-black text-gray-900">{tools.length}+</span>
+              <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Tools Indexed</p>
+            </div>
+            <div className="hidden sm:block w-px bg-gray-200" />
+            <div>
+              <span className="text-xl sm:text-2xl font-black text-gray-900">{categoryCount}</span>
+              <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Categories</p>
+            </div>
+            <div className="hidden sm:block w-px bg-gray-200" />
+            <div>
+              <span className="text-xl sm:text-2xl font-black text-gray-900">0-10</span>
+              <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Score System</p>
+            </div>
+            <div className="hidden sm:block w-px bg-gray-200" />
+            <div>
+              <span className="text-xl sm:text-2xl font-black text-gray-900">100%</span>
+              <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Independent</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          📂 カテゴリから探す
-        </h2>
+      {/* Category Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">
+            Browse Categories
+          </h2>
+          <Link href="/categories" className="text-sm text-primary hover:text-primary-dark font-bold uppercase">
+            View All &rarr;
+          </Link>
+        </div>
         <CategoryGrid />
       </section>
 
-      {/* Featured Tools */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          ⭐ 注目のAIツール
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featuredTools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
+      {/* Two Column: What's New + Latest News */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          {/* What's New */}
+          <div className="lg:col-span-3">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">
+                What&apos;s New
+              </h2>
+              <Link href="/search" className="text-sm text-primary hover:text-primary-dark font-bold uppercase">
+                See All &rarr;
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {recentTools.map((tool) => (
+                <ToolCard key={tool.id} tool={tool} />
+              ))}
+            </div>
+          </div>
+
+          {/* Latest News Sidebar */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">
+                AI News
+              </h2>
+              <Link href="/news" className="text-sm text-primary hover:text-primary-dark font-bold uppercase">
+                More &rarr;
+              </Link>
+            </div>
+            <div className="space-y-3">
+              {latestNews.map((item) => (
+                <Link
+                  key={item.id}
+                  href="/news"
+                  className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-primary/30 hover:shadow-sm transition-all"
+                >
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded uppercase">
+                      {item.category}
+                    </span>
+                    <span className="text-[11px] text-gray-400">{item.date}</span>
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-2">
+                    {item.title}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+
+            {/* Useful Tools Sidebar */}
+            <div className="mt-8 bg-gray-50 border border-gray-200 rounded-lg p-5">
+              <h3 className="text-xs font-black text-gray-900 uppercase tracking-wider mb-3">
+                Useful Tools
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/ranking" className="text-sm text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    Top Ranked Tools
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/categories" className="text-sm text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    Category Index
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/free" className="text-sm text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    Free Tools List
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/japanese" className="text-sm text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                    日本語対応 Tools
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* All Tools */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
-            🗂️ すべてのAIツール
+      {/* Category Sections - Top Picks per Category */}
+      {topCategories.map((cat) => {
+        const catTools = tools
+          .filter((t) => t.category === cat || t.subcategories.includes(cat))
+          .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+          .slice(0, 4);
+
+        if (catTools.length === 0) return null;
+
+        return (
+          <section key={cat} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-gray-100">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">
+                {CATEGORY_LABELS[cat]} — Top Picks
+              </h2>
+              <Link
+                href={`/categories/${cat}`}
+                className="text-sm text-primary hover:text-primary-dark font-bold uppercase"
+              >
+                View All &rarr;
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {catTools.map((tool) => (
+                <ToolCard key={tool.id} tool={tool} />
+              ))}
+            </div>
+          </section>
+        );
+      })}
+
+      {/* Featured Tools */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-gray-100">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">
+            Featured Tools
           </h2>
-          <span className="text-sm text-gray-500">{tools.length}件</span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {tools.map((tool) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {featuredTools.slice(0, 6).map((tool) => (
             <ToolCard key={tool.id} tool={tool} />
           ))}
         </div>
       </section>
 
       {/* SEO content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-white rounded-xl p-8 border border-gray-200">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
-            AI Navigatorとは？
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="bg-gray-50 rounded-lg border border-gray-200 p-8">
+          <h2 className="text-lg font-black text-gray-900 uppercase mb-4">
+            About AI Navigator
           </h2>
-          <p className="text-gray-600 mb-4">
-            AI Navigatorは、最新のAIツール情報を日本語で検索・比較できるディレクトリサイトです。
-            ChatGPT、Claude、Sora、Devinなど、定番ツールから最新の注目ツールまで、
-            カテゴリ・価格・日本語対応の有無で簡単に絞り込めます。
-          </p>
-          <p className="text-gray-600 mb-4">
-            「AIで動画を作りたい」「コーディングを自動化したい」「議事録をAIに任せたい」——
-            そんな具体的な課題から、最適なAIツールを見つけましょう。
-          </p>
-          <p className="text-gray-600 mb-4">
-            毎日新しいツールとAIニュースを追加。常に最新のAI情報をお届けします。
-          </p>
-          <div className="flex flex-wrap gap-4 mt-6">
-            <Link href="/news" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-              📰 最新ニュースを読む →
+          <div className="text-sm text-gray-600 space-y-3 leading-relaxed">
+            <p>
+              AI Navigatorは、最新のAIツール情報を独自スコアで評価・比較できるプラットフォームです。
+              ChatGPT、Claude、Sora、Devinなど、定番ツールから最新の注目ツールまで、
+              機能性・使いやすさ・コスパの3軸で客観的に評価しています。
+            </p>
+            <p>
+              「AIで動画を作りたい」「コーディングを自動化したい」「議事録をAIに任せたい」——
+              そんな具体的な課題から、最適なAIツールを見つけましょう。
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4 mt-5">
+            <Link href="/ranking" className="text-sm text-primary hover:text-primary-dark font-bold uppercase">
+              View Rankings &rarr;
             </Link>
-            <Link href="/categories" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-              📂 カテゴリ一覧を見る →
+            <Link href="/categories" className="text-sm text-primary hover:text-primary-dark font-bold uppercase">
+              Browse Categories &rarr;
             </Link>
           </div>
         </div>

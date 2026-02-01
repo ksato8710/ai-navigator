@@ -1,3 +1,10 @@
+export interface ToolScore {
+  overall: number; // 0-10
+  functionality: number; // 0-10
+  usability: number; // 0-10
+  costPerformance: number; // 0-10
+}
+
 export interface AITool {
   id: string;
   slug: string;
@@ -18,6 +25,7 @@ export interface AITool {
   alternatives: string[]; // slugs of alternative tools
   rating?: number; // 1-5
   reviewCount?: number;
+  score?: ToolScore; // 0-10 scoring system
   addedAt: string; // ISO date
   updatedAt: string; // ISO date
   featured: boolean;
@@ -91,3 +99,18 @@ export const PRICING_LABELS: Record<PricingType, string> = {
   paid: "有料",
   enterprise: "エンタープライズ",
 };
+
+export function getScoreColor(score: number): string {
+  if (score >= 8) return "bg-score-good text-white";
+  if (score >= 6) return "bg-score-ok text-white";
+  return "bg-score-bad text-white";
+}
+
+export function getScoreLabel(score: number): string {
+  if (score >= 9) return "Excellent";
+  if (score >= 8) return "Great";
+  if (score >= 7) return "Good";
+  if (score >= 6) return "Average";
+  if (score >= 5) return "Below Avg";
+  return "Poor";
+}

@@ -2,12 +2,11 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { news } from "@/data/news";
 import { tools } from "@/data/tools";
-import { CATEGORY_ICONS } from "@/types/tool";
 
 export const metadata: Metadata = {
-  title: "AIニュース — 最新のAIツール・サービス情報 | AI Navigator",
+  title: "AI News — AI Navigator",
   description:
-    "AIツールの最新リリース情報、アップデート、業界ニュースを日本語でお届け。ChatGPT、Claude、Sora、Devinなど注目ツールの動向をチェック。",
+    "AIツールの最新リリース情報、アップデート、業界ニュースを日本語でお届け。",
 };
 
 const CATEGORY_TAG_COLORS: Record<string, string> = {
@@ -35,111 +34,110 @@ function getRelativeTime(dateStr: string): string {
   const diffDays = Math.floor(
     (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
   );
-  if (diffDays === 0) return "今日";
-  if (diffDays === 1) return "昨日";
-  if (diffDays < 7) return `${diffDays}日前`;
-  if (diffDays < 30) return `${Math.floor(diffDays / 7)}週間前`;
-  if (diffDays < 365) return `${Math.floor(diffDays / 30)}ヶ月前`;
-  return `${Math.floor(diffDays / 365)}年前`;
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays}d ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)}w ago`;
+  if (diffDays < 365) return `${Math.floor(diffDays / 30)}mo ago`;
+  return `${Math.floor(diffDays / 365)}y ago`;
 }
 
 export default function NewsPage() {
   const sortedNews = [...news].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
-      <div className="mb-10">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-          📰 AIニュース
-        </h1>
-        <p className="text-lg text-gray-600">
-          AIツールの最新リリース、アップデート、業界の動向をお届けします。
-        </p>
-      </div>
+    <div>
+      <section className="bg-gray-50 border-b border-gray-200 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-2xl sm:text-4xl font-black text-gray-900 uppercase tracking-tight mb-2">
+            AI <span className="text-primary">News</span>
+          </h1>
+          <p className="text-sm text-gray-500">
+            Latest releases, updates, and industry news
+          </p>
+        </div>
+      </section>
 
-      {/* News List */}
-      <div className="space-y-6">
-        {sortedNews.map((item) => {
-          const tagColor =
-            CATEGORY_TAG_COLORS[item.category] ||
-            "bg-gray-100 text-gray-800";
-          const relatedTools = item.relatedToolSlugs
-            .map((slug) => tools.find((t) => t.slug === slug))
-            .filter(Boolean);
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-4">
+          {sortedNews.map((item) => {
+            const tagColor =
+              CATEGORY_TAG_COLORS[item.category] || "bg-gray-100 text-gray-800";
+            const relatedTools = item.relatedToolSlugs
+              .map((slug) => tools.find((t) => t.slug === slug))
+              .filter(Boolean);
 
-          return (
-            <article
-              key={item.id}
-              className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColor}`}
-                >
-                  {item.category}
-                </span>
-                <time className="text-sm text-gray-500">
-                  {formatDate(item.date)}
-                </time>
-                <span className="text-xs text-gray-400">
-                  {getRelativeTime(item.date)}
-                </span>
-              </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
-                {item.title}
-              </h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                {item.summary}
-              </p>
-              {relatedTools.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs text-gray-400">関連ツール:</span>
-                  {relatedTools.map(
-                    (tool) =>
-                      tool && (
-                        <Link
-                          key={tool.slug}
-                          href={`/tools/${tool.slug}`}
-                          className="inline-flex items-center gap-1 text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full hover:bg-blue-100 transition-colors"
-                        >
-                          {CATEGORY_ICONS[tool.category]} {tool.name}
-                        </Link>
-                      )
-                  )}
+            return (
+              <article
+                key={item.id}
+                className="bg-white border border-gray-200 rounded-lg p-5 hover:border-primary/30 hover:shadow-sm transition-all"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${tagColor}`}>
+                    {item.category}
+                  </span>
+                  <time className="text-xs text-gray-500">
+                    {formatDate(item.date)}
+                  </time>
+                  <span className="text-xs text-gray-400">
+                    {getRelativeTime(item.date)}
+                  </span>
                 </div>
-              )}
-              {item.source && (
-                <p className="mt-3 text-xs text-gray-400">
-                  出典: {item.source}
+                <h2 className="text-base font-bold text-gray-900 mb-2 leading-snug">
+                  {item.title}
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                  {item.summary}
                 </p>
-              )}
-            </article>
-          );
-        })}
-      </div>
+                {relatedTools.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[10px] text-gray-400 uppercase font-bold">Related:</span>
+                    {relatedTools.map(
+                      (tool) =>
+                        tool && (
+                          <Link
+                            key={tool.slug}
+                            href={`/tools/${tool.slug}`}
+                            className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded hover:bg-primary/10 hover:text-primary transition-colors font-medium"
+                          >
+                            {tool.name}
+                          </Link>
+                        )
+                    )}
+                  </div>
+                )}
+                {item.source && (
+                  <p className="mt-2 text-[10px] text-gray-400 uppercase">
+                    Source: {item.source}
+                  </p>
+                )}
+              </article>
+            );
+          })}
+        </div>
 
-      {/* CTA */}
-      <div className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 text-center border border-blue-100">
-        <h2 className="text-xl font-bold text-gray-900 mb-2">
-          🧭 最新ツールを探す
-        </h2>
-        <p className="text-gray-600 mb-4">
-          ニュースで気になったツールを詳しくチェック
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/categories"
-            className="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-          >
-            カテゴリから探す
-          </Link>
-          <Link
-            href="/search"
-            className="bg-white text-gray-700 px-6 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium border border-gray-300"
-          >
-            キーワード検索
-          </Link>
+        {/* CTA */}
+        <div className="mt-10 bg-gray-50 rounded-lg border border-gray-200 p-6 text-center">
+          <h2 className="text-sm font-black text-gray-900 uppercase mb-2">
+            Explore More Tools
+          </h2>
+          <p className="text-xs text-gray-500 mb-4">
+            ニュースで気になったツールを詳しくチェック
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/categories"
+              className="bg-primary text-white px-5 py-2 rounded hover:bg-primary-dark transition-colors text-xs font-bold uppercase"
+            >
+              Browse Categories
+            </Link>
+            <Link
+              href="/search"
+              className="bg-white text-gray-700 px-5 py-2 rounded hover:bg-gray-100 transition-colors text-xs font-bold border border-gray-200 uppercase"
+            >
+              Search Tools
+            </Link>
+          </div>
         </div>
       </div>
     </div>

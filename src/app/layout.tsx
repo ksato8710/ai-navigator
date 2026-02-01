@@ -15,20 +15,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Navigator — あなたに最適なAIツールが30秒で見つかる",
+  title: "AI Navigator — Find The Best AI Tool For Your Needs",
   description:
-    "日本語で使えるAIツールを用途別に検索・比較。画像生成、文章作成、コード支援、翻訳など、目的に合ったAIツールを見つけよう。",
+    "日本語で使えるAIツールを独自スコアで評価・比較。画像生成、文章作成、コード支援、翻訳など、目的に合ったAIツールを見つけよう。",
   keywords: [
     "AIツール",
     "AI比較",
-    "AIおすすめ",
+    "AIレビュー",
+    "AIスコア",
     "ChatGPT",
     "画像生成AI",
     "AIツール一覧",
+    "AIランキング",
   ],
   openGraph: {
-    title: "AI Navigator — あなたに最適なAIツールが30秒で見つかる",
-    description: "日本語で使えるAIツールを用途別に検索・比較。",
+    title: "AI Navigator — Find The Best AI Tool For Your Needs",
+    description: "AIツールを独自スコアで評価・比較。日本語対応ツールを簡単検索。",
     siteName: "AI Navigator",
     locale: "ja_JP",
     type: "website",
@@ -43,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-white`}
       >
         <Header />
         <main className="flex-1">{children}</main>

@@ -2,65 +2,51 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-16">
+    <footer className="bg-[#1a1a2e] text-gray-400 mt-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-2xl">🧭</span>
-              <span className="text-lg font-bold text-white">
+            <Link href="/" className="inline-block mb-3">
+              <span className="text-xl font-black text-white uppercase tracking-tight">
                 AI Navigator
               </span>
-            </div>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              最新のAIツールを日本語で検索・比較。
-              あなたに最適なAIツールが見つかるディレクトリサイト。
+            </Link>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              AIツールの独立系レビュー＆比較プラットフォーム。
+              全ツールを実際にテスト・評価し、客観的なスコアでランキング。
             </p>
           </div>
 
           {/* Explore */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">探す</h3>
+            <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
+              EXPLORE
+            </h3>
             <ul className="space-y-2.5">
               <li>
-                <Link
-                  href="/categories"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  📂 カテゴリ一覧
+                <Link href="/categories" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  All Categories
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/ranking"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  🏆 ランキング
+                <Link href="/ranking" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Top Ranked Tools
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/free"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  🆓 無料ツール
+                <Link href="/free" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Free Tools
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/japanese"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  🇯🇵 日本語対応
+                <Link href="/japanese" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  日本語対応ツール
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/news"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  📰 AIニュース
+                <Link href="/news" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Latest News
                 </Link>
               </li>
             </ul>
@@ -68,88 +54,65 @@ export default function Footer() {
 
           {/* Popular Categories */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">
-              人気カテゴリ
+            <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
+              POPULAR CATEGORIES
             </h3>
             <ul className="space-y-2.5">
               <li>
-                <Link
-                  href="/categories/chatbot"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  💬 チャットボット
+                <Link href="/categories/chatbot" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Chatbots
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/categories/image-generation"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  🎨 画像生成
+                <Link href="/categories/image-generation" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Image Generation
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/categories/code-assistant"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  💻 コード支援
+                <Link href="/categories/code-assistant" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Code Assistants
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/categories/video-generation"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  🎬 動画生成
+                <Link href="/categories/video-generation" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Video Generation
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/categories/productivity"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  ⚡ 生産性向上
+                <Link href="/categories/productivity" className="text-sm text-gray-500 hover:text-white transition-colors">
+                  Productivity
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Related */}
+          {/* About */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">
-              関連サイト
+            <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
+              ABOUT
             </h3>
             <ul className="space-y-2.5">
               <li>
-                <a
-                  href="https://essential-navigator.com"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Essential Navigator ↗
+                <a href="https://essential-navigator.com" className="text-sm text-gray-500 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+                  Essential Navigator
                 </a>
               </li>
             </ul>
             <div className="mt-6">
-              <h3 className="text-sm font-semibold text-white mb-3">
-                情報源
-              </h3>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                ツール情報はAIエージェントにより毎日自動更新。
-                ProductHunt、Hacker News、各社公式サイトから最新情報を収集しています。
+              <p className="text-xs text-gray-600 leading-relaxed">
+                ツール情報はAIエージェントにより定期更新。
+                各社公式サイト、ProductHunt、Hacker Newsから最新情報を収集しています。
               </p>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-500">
-            © 2026 AI Navigator. All rights reserved.
+        <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-gray-600">
+            &copy; 2026 AI Navigator. All rights reserved. 100% Independent Reviews.
           </p>
           <p className="text-xs text-gray-600">
-            Powered by 🧭 AI Navigator — テクノロジーの海を照らす
+            Powered by AI Navigator
           </p>
         </div>
       </div>

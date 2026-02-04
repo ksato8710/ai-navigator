@@ -45,9 +45,10 @@ async function getNewsPost(slug: string): Promise<NewsPost | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const post = await getNewsPost(params.slug);
+  const { slug } = await params;
+  const post = await getNewsPost(slug);
   
   if (!post) {
     return {
@@ -69,9 +70,10 @@ export async function generateMetadata({
 export default async function NewsPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await getNewsPost(params.slug);
+  const { slug } = await params;
+  const post = await getNewsPost(slug);
   
   if (!post) {
     notFound();

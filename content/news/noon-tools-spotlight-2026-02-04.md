@@ -104,4 +104,4 @@ Vincent Jong（$1M ARR達成ソロファウンダー）が指摘する通り、*
 **調査時点:** 2026年2月4日 12:00 JST  
 **情報源:** [Hacker News](https://news.ycombinator.com), [Built This Week](https://www.builtthisweek.com), MIT Technology Review
 
-**注記:** 一部ツールの公式サイトは調査継続中です。最新情報は各ツールの参照リンクでご確認ください。
+**注記:** 一部ツールの公式サイトは調査継続中です。最新情報は各ツールの参照リンクでご確認ください。<!-- Updated: Wed Feb  4 13:28:04 JST 2026 -->

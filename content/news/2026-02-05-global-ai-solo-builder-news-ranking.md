@@ -5,7 +5,7 @@ date: "2026-02-05"
 category: "deep-dive"
 description: "2026年2月4-5日の24時間で起きた、AI Solo Builderの世界を変える重大ニュースを独自の基準でランキング化。市場激震、新ツール登場、開発革新まで完全網羅。"
 image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=420&fit=crop"
-readTime: 6
+readTime: "6"
 ---
 
 # 過去24時間でAI Solo Builderに激震！グローバル重大ニュース独自ランキングTOP10
@@ -186,4 +186,4 @@ readTime: 6
 ---
 
 *探索方法論: Brave Search API使用、英語圏主要メディア・開発者コミュニティを横断調査*  
-*更新頻度: リアルタイム情報収集により随時アップデート*# Deploy trigger
+*更新頻度: リアルタイム情報収集により随時アップデート*

@@ -132,17 +132,28 @@ export default function Home() {
                 <Link
                   key={item.id}
                   href="/news"
-                  className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-primary/30 hover:shadow-sm transition-all"
+                  className="block bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-primary/30 hover:shadow-sm transition-all"
                 >
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded uppercase">
-                      {item.category}
-                    </span>
-                    <span className="text-[11px] text-gray-400">{item.date}</span>
+                  {item.image && (
+                    <div className="aspect-[2/1] overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="p-4">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded uppercase">
+                        {item.category}
+                      </span>
+                      <span className="text-[11px] text-gray-400">{item.date}</span>
+                    </div>
+                    <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-2">
+                      {item.title}
+                    </h3>
                   </div>
-                  <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-2">
-                    {item.title}
-                  </h3>
                 </Link>
               ))}
             </div>

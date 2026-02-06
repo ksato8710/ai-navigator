@@ -7,6 +7,7 @@ export interface NewsItem {
   relatedToolSlugs: string[];
   source?: string;
   sourceUrl?: string;
+  image?: string;
 }
 
 export const news: NewsItem[] = [
@@ -18,6 +19,7 @@ export const news: NewsItem[] = [
     category: "コード支援",
     relatedToolSlugs: ["claude", "claude-code"],
     source: "Anthropic Blog",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=420&fit=crop",
   },
   {
     id: "openai-codex-cli",
@@ -27,6 +29,7 @@ export const news: NewsItem[] = [
     category: "コード支援",
     relatedToolSlugs: ["codex-cli", "chatgpt"],
     source: "OpenAI",
+    image: "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?w=800&h=420&fit=crop",
   },
   {
     id: "sora-general-release",
@@ -36,6 +39,7 @@ export const news: NewsItem[] = [
     category: "動画生成",
     relatedToolSlugs: ["sora", "chatgpt"],
     source: "OpenAI",
+    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=420&fit=crop",
   },
   {
     id: "devin-public-launch",
@@ -45,6 +49,7 @@ export const news: NewsItem[] = [
     category: "コード支援",
     relatedToolSlugs: ["devin"],
     source: "Cognition",
+    image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&h=420&fit=crop",
   },
   {
     id: "google-veo2-launch",
@@ -54,6 +59,7 @@ export const news: NewsItem[] = [
     category: "動画生成",
     relatedToolSlugs: ["veo-2", "gemini"],
     source: "Google DeepMind",
+    image: "https://images.unsplash.com/photo-1516849677043-ef67c9557e16?w=800&h=420&fit=crop",
   },
   {
     id: "bolt-new-explosive-growth",
@@ -63,6 +69,7 @@ export const news: NewsItem[] = [
     category: "コード支援",
     relatedToolSlugs: ["bolt-new", "v0-dev", "lovable"],
     source: "StackBlitz",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=420&fit=crop",
   },
   {
     id: "elevenlabs-dubbing",
@@ -90,6 +97,7 @@ export const news: NewsItem[] = [
     category: "チャットボット",
     relatedToolSlugs: ["grok", "chatgpt", "claude"],
     source: "xAI",
+    image: "https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?w=800&h=420&fit=crop",
   },
   {
     id: "notebooklm-audio-overview",

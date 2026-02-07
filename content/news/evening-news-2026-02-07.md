@@ -5,7 +5,7 @@ date: "2026-02-07"
 category: "evening-news"
 description: "xAI創設者の57億円ペントハウス購入とReasoning-First Modelsの台頭"
 image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=420&fit=crop"
-readTime: 3
+readTime: "3"
 ---
 
 ## 今夜のAIトピック概要

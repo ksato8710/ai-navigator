@@ -162,4 +162,14 @@ export const news: NewsItem[] = [
     relatedToolSlugs: ["kling-ai", "sora", "runway"],
     source: "Kuaishou",
   },
+  {
+    id: "evening-news-2026-02-07",
+    title: "AI業界動向 夜刊 - xAI創設者の億ペントハウス購入、推論優先モデルの台頭｜2026年2月7日",
+    date: "2026-02-07",
+    summary: "xAI共同創設者Igor Babuskhinが57億円のロンドンペントハウスを購入。AI企業の急成長と個人資産蓄積の象徴として注目。同時にReasoning-First Modelsが企業市場で台頭し、GPT-5.2等の推論優先アーキテクチャが主流に。",
+    category: "チャットボット",
+    relatedToolSlugs: ["grok", "chatgpt", "claude"],
+    source: "AI Solo Builder",
+    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=420&fit=crop",
+  },
 ];

@@ -42,6 +42,17 @@ async function getNewsPost(slug: string): Promise<NewsPost | null> {
   }
 }
 
+export async function generateStaticParams() {
+  const newsDir = path.join(process.cwd(), "content", "news");
+  const filenames = fs.readdirSync(newsDir);
+  
+  return filenames
+    .filter((name) => name.endsWith('.md'))
+    .map((name) => ({
+      slug: name.replace('.md', ''),
+    }));
+}
+
 export async function generateMetadata({
   params,
 }: {

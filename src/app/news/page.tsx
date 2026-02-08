@@ -9,6 +9,10 @@ export const metadata: Metadata = {
     "AIツールの最新リリース情報、アップデート、業界ニュースを日本語でお届け。",
 };
 
+// Force static generation for Vercel deployment
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 const CATEGORY_TAG_COLORS: Record<string, string> = {
   "コード支援": "bg-purple-100 text-purple-800",
   "動画生成": "bg-pink-100 text-pink-800",
